@@ -1,25 +1,39 @@
 package application;
 
-import java.io.File;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Program {
 	public static void main(String[] args) {
 
-		File file  = new File("c:\\Users\\edble\\Teste_Lendo_Arquivo.txt");
-		Scanner scanner = null;
+		String path = "c:\\Users\\edble\\Teste_Lendo_Arquivo.txt";
+		FileReader fileReader = null;
+		BufferedReader bufferedReader = null;
+
 		try {
-			scanner = new Scanner(file);
-			while(scanner.hasNextLine()) {
-				System.out.println(scanner.nextLine());
+			fileReader = new FileReader(path);
+			bufferedReader = new BufferedReader(fileReader);
+
+			String line = bufferedReader.readLine();
+			while (line != null) {
+				System.out.println(line);
+				line = bufferedReader.readLine();
+
 			}
-		} 
-		catch (Exception e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
-		finally {
-			if (scanner != null) {
-				scanner.close();
+		} catch (IOException e) {
+			System.out.println("Error: " + e.getMessage());
+		} finally {
+			try {
+
+				if (bufferedReader != null) {
+					bufferedReader.close();
+				}
+				if (fileReader != null) {
+					fileReader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}

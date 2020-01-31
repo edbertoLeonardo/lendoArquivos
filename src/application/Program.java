@@ -8,14 +8,11 @@ public class Program {
 	public static void main(String[] args) {
 
 		String path = "c:\\Users\\edble\\Teste_Lendo_Arquivo.txt";
-		FileReader fileReader = null;
-		BufferedReader bufferedReader = null;
+		
 
-		try {
-			fileReader = new FileReader(path);
-			bufferedReader = new BufferedReader(fileReader);
-
-			String line = bufferedReader.readLine();
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))){
+		String line = bufferedReader.readLine();
+		
 			while (line != null) {
 				System.out.println(line);
 				line = bufferedReader.readLine();
@@ -23,18 +20,8 @@ public class Program {
 			}
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
-		} finally {
-			try {
-
-				if (bufferedReader != null) {
-					bufferedReader.close();
-				}
-				if (fileReader != null) {
-					fileReader.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
+		
 		}
 	}
 }

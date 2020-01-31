@@ -1,27 +1,23 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class Program {
 	public static void main(String[] args) {
 
-		String path = "c:\\Users\\edble\\Teste_Lendo_Arquivo.txt";
+		String[] lines =  new String[] { "Teste", "Palavras para teste", "Mais palavras"};
 		
-
-		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))){
-		String line = bufferedReader.readLine();
-		
-			while (line != null) {
-				System.out.println(line);
-				line = bufferedReader.readLine();
-
+		String path = "c:\\Users\\edble\\Criar_Pasta.txt";
+		try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))){
+			for (String line : lines) {
+				bufferedWriter.write(line);
+				bufferedWriter.newLine();
 			}
-		} catch (IOException e) {
-			System.out.println("Error: " + e.getMessage());
-			
-		
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
